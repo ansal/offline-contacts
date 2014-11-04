@@ -15,7 +15,9 @@ def authenticate_user(request):
     if user is not None:
         if user.is_active:
             auth_login(request, user)
-            return HttpResponse('User logged in')
+            return HttpResponseRedirect(
+                reverse('names_dashboard')
+            )
         else:
             return HttpResponseRedirect(
                 reverse('accounts_login') + '?disabled=true'
@@ -67,8 +69,7 @@ def register(request):
         )
         user.set_password(password)
         user.save()
-        # TODO: Redirect to login
-        return HttpResponse('Account created')
+        return authenticate_user(request)
     else:
         response['username_exists'] = True
         return render(request, 'register.html', response)

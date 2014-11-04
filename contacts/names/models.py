@@ -6,3 +6,5 @@ class Contact(models.Model):
     name = models.CharField(max_length=250)
     email = models.EmailField()
     phone = models.CharField(max_length=30)
+    created = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)

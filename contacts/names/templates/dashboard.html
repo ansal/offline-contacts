@@ -1,4 +1,5 @@
 {% extends 'names_base.html' %}
+{% load staticfiles %}
 
 {% block title %} Contacts {% endblock %}
 
@@ -9,6 +10,14 @@
         <div class="row">
             
             <div class="col-sm-3 col-md-2 sidebar">
+
+                <ul class="nav nav-sidebar">
+                    <li>
+                        <a href="#" class="btn btn-info">
+                            New Contact
+                        </a>
+                    </li>
+                </ul>
 
                 <ul class="nav nav-sidebar">
                     <li class="active"><a href="#">Overview</a></li>
@@ -23,4 +32,9 @@
 
     </div><!-- container-fluid -->
 
+{% endblock %}
+
+{% block js_app %}
+    <script src="{% static "js/models.js" %}"></script>
+    <script src="{% static "js/collections.js" %}"></script>
 {% endblock %}
