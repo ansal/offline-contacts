@@ -15,9 +15,16 @@ def json_validation_error(name):
         'error': name + ' is required'
     }, status=400)
 
+# Utility function to raise 404 error
+def json_404_error():
+    return JsonResponse({
+        'error': 'object not found'
+    }, status=404)
+
 # Utility function that returns a contact as a JSON object
 def contact_as_json(contact):
     return JsonResponse({
+        'id': contact.pk,
         'name': contact.name,
         'email': contact.email,
         'phone': contact.phone
@@ -42,10 +49,11 @@ def contact(request):
     if request.method == 'GET':
         contacts = Contact.objects.filter(
             user = request.user
-        )
+        ).order_by('name')
         response = []
         for contact in contacts:
             response.append({
+                'id': contact.pk,
                 'name': contact.name,
                 'phone': contact.phone,
                 'email': contact.email
@@ -75,3 +83,41 @@ def contact(request):
         contact.save()
 
         return contact_as_json(contact)
+
+@login_required
+@csrf_exempt
+def contact_update(request, pk=None):
+
+    try:
+        contact = Contact.objects.get(user = request.user, pk=pk)
+    except:
+        return json_404_error()
+
+    if request.method == 'PUT':
+
+        request_json = json.loads( request.body )
+
+        if 'name' in request_json and request_json['name']:
+            contact.name = request_json['name']
+        else:
+            return json_validation_error('name')
+
+        if 'email' in request_json and request_json['email']:
+            contact.email = request_json['email']
+        else:
+            return json_validation_error('email')
+
+        if 'phone' in request_json and request_json['phone']:
+            contact.phone = request_json['phone']
+        else:
+            return json_validation_error('phone')
+
+        contact.save()
+
+        return contact_as_json(contact)
+
+    if request.method == 'DELETE':
+        contact.delete()
+        return JsonResponse({
+            'success': 'object deleted'
+        })
