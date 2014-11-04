@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Create New Account {% endblock %}
+
+{% block content %}
+
+{% if form_error %}
+<div class="alert alert-danger">
+    <strong>Hey there!</strong> You have missed some fields! Please enter all fields and try again.
+</div>
+{% endif %}
+
+{% if username_exists %}
+<div class="alert alert-danger">
+    <strong>Hey there!</strong> Username {{ username }} already exists! Try another one.
+</div>
+{% endif %}
+
+<form class="form-signin" role="form" method="POST" action="{% url "accounts_register" %}">
+  {% csrf_token %}
+  <h2 class="form-signin-heading">New Here?</h2>
+  <input type="text" name="name" class="form-control" placeholder="Your Name"  autofocus value="{{ name }}">
+  <input type="text" name="username" class="form-control" placeholder="Desired Username"  value="{{ username }}">
+  <input type="password" name="password" class="form-control" placeholder="Password" >
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
+  <hr>
+  <p>
+      Already joined? Login <a href="{% url "accounts_login" %}">here</a>.
+  </p>
+</form>
+
+{% endblock %}

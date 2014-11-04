@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'accounts',
-    'names'
+    'names',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -88,3 +88,6 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Login Url
+LOGIN_URL = '/accounts/login/'
