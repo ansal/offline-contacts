@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 def authenticate_user(request):
     username = request.POST.get('username')
     password = request.POST.get('password')
+    request.session.set_expiry(0)
     user = authenticate(username=username, password=password)
     if user is not None:
         if user.is_active:

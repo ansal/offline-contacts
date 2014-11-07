@@ -84,6 +84,8 @@ def contact(request):
 
         return contact_as_json(contact)
 
+# For PUT, updates the object
+# For DELETE, deletes the object
 @login_required
 @csrf_exempt
 def contact_update(request, pk=None):
