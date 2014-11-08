@@ -9,16 +9,24 @@
     <strong>Oh No!</strong> Invalid username or password! Enter correct ones and try again.
 </div>
 {% endif %}
+<h2>
+  Offline Contacts <br>
+  <small>
+    A demo app to show HTML5's offline capabilities!
+  </small>
+</h2>
+<hr>
 <form class="form-signin" role="form" method="POST" action="{% url "accounts_login" %}">
   {% csrf_token %}
-  <h2 class="form-signin-heading">Welcome Back!</h2>
+  <h4 class="form-signin-heading">Login or Signup <a href="{% url "accounts_register" %}">here</a>.</h4>
   <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
   <input type="password" name="password" class="form-control" placeholder="Password" required>
   <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
   <hr>
-  <p>
-      New here? Signup <a href="{% url "accounts_register" %}">here</a>.
-  </p>
 </form>
+
+<p class="pull-right">
+  Grab source code at <a href="https://github.com/ansal/offline-contacts">https://github.com/ansal/offline-contacts</a>.
+</p>
 
 {% endblock %}

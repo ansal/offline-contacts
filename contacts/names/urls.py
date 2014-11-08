@@ -7,4 +7,5 @@ urlpatterns = patterns('',
     url(r'^$', names.views.dashboard, name='names_dashboard'),
     url(r'^api/contact/$', names.views.contact, name='names_contact'),
     url(r'^api/contact/(?P<pk>\d+)/$', names.views.contact_update, name='names_contact_update'),
+    url(r'^api/sync/$', names.views.offline_sync, name='names_sync'),
 )

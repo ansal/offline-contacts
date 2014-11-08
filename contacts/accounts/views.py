@@ -15,9 +15,10 @@ def authenticate_user(request):
     user = authenticate(username=username, password=password)
     if user is not None:
         if user.is_active:
+            request.session.set_expiry(0)
             auth_login(request, user)
             return HttpResponseRedirect(
-                reverse('names_dashboard')
+                reverse('dashboard')
             )
         else:
             return HttpResponseRedirect(

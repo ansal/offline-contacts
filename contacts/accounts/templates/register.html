@@ -16,17 +16,26 @@
 </div>
 {% endif %}
 
+<h2>
+  Offline Contacts <br>
+  <small>
+    A demo app to show HTML5's offline capabilities!
+  </small>
+</h2>
+<hr>
+
 <form class="form-signin" role="form" method="POST" action="{% url "accounts_register" %}">
   {% csrf_token %}
-  <h2 class="form-signin-heading">New Here?</h2>
+  <h4 class="form-signin-heading">Register or Login <a href="{% url "accounts_login" %}">here</a>.</h4>
   <input type="text" name="name" class="form-control" placeholder="Your Name"  autofocus value="{{ name }}">
   <input type="text" name="username" class="form-control" placeholder="Desired Username"  value="{{ username }}">
   <input type="password" name="password" class="form-control" placeholder="Password" >
   <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
   <hr>
-  <p>
-      Already joined? Login <a href="{% url "accounts_login" %}">here</a>.
-  </p>
 </form>
+
+<p class="pull-right">
+  Grab source code at <a href="https://github.com/ansal/offline-contacts">https://github.com/ansal/offline-contacts</a>.
+</p>
 
 {% endblock %}

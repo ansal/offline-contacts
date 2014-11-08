@@ -96,8 +96,12 @@ var App = App || {};
     },
 
     addAll: function () {
-      this.$names.html('');
-      App.contacts.each(this.addOne, this);
+      if( App.contacts.models.length === 0 ) {
+        App.offline.fetch();
+      } else {
+        this.$names.html('');
+        App.contacts.each(this.addOne, this);
+      }
     },
 
     buildAttributes: function() {

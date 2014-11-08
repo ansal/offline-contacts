@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
-
+  <!-- manifest="/static/cache.manifest" -->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,9 +37,6 @@
               <a href="{% url "accounts_logout" %}">Logout</a>
             </li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search Contacts">
-          </form>
         </div>
       </div>
     </div>
@@ -51,6 +48,7 @@
     <script src="{% static "js/lib/bootstrap.min.js" %}"></script>
     <script src="{% static "js/lib/underscore.min.js" %}"></script>
     <script src="{% static "js/lib/backbone.min.js" %}"></script>
+    <script src="{% static "js/lib/backbone.localStorage-min.js" %}"></script>
 
     <!-- Backbone App -->
     {% block js_app %}{% endblock %}

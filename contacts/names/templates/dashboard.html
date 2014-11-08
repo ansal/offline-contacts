@@ -21,6 +21,22 @@
                 <div class="alert alert-danger" id="form_error" style="display:none;">
                     <strong>Hey!</strong> Please fill all the fields!
                 </div>
+
+                <div class="alert alert-info" style="display:none" id="offline_mode">
+                    <strong>Hey!</strong> App is running in offline mode. All data will be synced back to server once network connectivity is back!
+                </div>
+
+                <div class="alert alert-info" style="display:none" id="online_mode">
+                    <strong>Hey!</strong> Looks like network connectivity is back. Trying to sync data with server!
+                </div>
+
+                <div class="alert alert-success" style="display:none" id="sync_success">
+                    <strong>Success!</strong> Syncing with server was successfull!
+                </div>
+
+                <div class="alert alert-danger" id="sync_error" style="display:none">
+                    <strong>Error!</strong> Syncing with server failed. If this problem persists, please clear your browser history/cache and try again!
+                </div>
                 
                 <form class="form-inline" role="form" action="." method="GET">
                     <div class="form-group">
@@ -112,5 +128,6 @@
     <script src="{% static "js/models.js" %}"></script>
     <script src="{% static "js/collections.js" %}"></script>
     <script src="{% static "js/views.js" %}"></script>
+    <script src="{% static "js/offline.js" %}"></script>
     <script src="{% static "js/app.js" %}"></script>
 {% endblock %}

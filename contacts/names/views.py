@@ -53,7 +53,7 @@ def contact(request):
         response = []
         for contact in contacts:
             response.append({
-                'id': contact.pk,
+                'id': contact.client_id,
                 'name': contact.name,
                 'phone': contact.phone,
                 'email': contact.email
@@ -123,3 +123,44 @@ def contact_update(request, pk=None):
         return JsonResponse({
             'success': 'object deleted'
         })
+
+def is_id_in_client(data, client_id):
+    for i in range(0, len(data)):
+        if data[i]['id'] == client_id:
+            return True
+    return False
+
+@login_required
+@csrf_exempt
+def offline_sync(request):
+
+    if 'data' in request.POST and request.POST['data']:
+        data = request.POST['data']
+    else:
+        return json_validation_error('data')
+
+    data = json.loads(data)
+
+    for i in range(0, len(data)):
+        try:
+            contact = Contact.objects.get(
+                user = request.user,
+                client_id = data[i]['id']
+            )
+        except:
+            contact = Contact()
+        contact.user = request.user
+        contact.client_id = data[i]['id']
+        contact.name = data[i]['name']
+        contact.email = data[i]['email']
+        contact.phone = data[i]['phone']
+        contact.save()
+
+    contacts = Contact.objects.filter(user = request.user)
+    for contact in contacts:
+        if is_id_in_client(data, contact.client_id) == False:
+            contact.delete()
+
+    return JsonResponse({
+        'success': 'items synced'
+    })

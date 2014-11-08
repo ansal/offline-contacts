@@ -1,0 +1,12 @@
+CACHE MANIFEST
+/static/css/bootstrap.min.css
+/static/js/lib/jquery.min.js
+/static/js/lib/bootstrap.min.js
+/static/js/lib/underscore.min.js
+/static/js/lib/backbone.min.js
+/static/js/lib/backbone.localStorage-min.js
+/static/js/models.js
+/static/js/collections.js
+/static/js/views.js
+/static/js/offline.js
+/static/js/app.js
